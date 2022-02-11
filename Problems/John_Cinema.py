@@ -16,5 +16,6 @@ def john(card, ticket, perc, n=1, t_in_time=1, total=0):
         return john(card, ticket, perc, n+1, t_in_time, total)
 
 
-print(john(500, 15, 0.9))
-print(john(100, 10, 0.95))
+if __name__ == '__main__':
+    print(john(500, 15, 0.9))
+    print(john(100, 10, 0.95))

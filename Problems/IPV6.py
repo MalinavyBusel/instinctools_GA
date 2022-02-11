@@ -9,4 +9,5 @@ def IP(ip):
     return total_sum
 
 
-print(IP('1B1D:AF01:3847:F8C4:20E9:0111:DFEA:AAAA'))
+if __name__ == '__main__':
+    print(IP('1B1D:AF01:3847:F8C4:20E9:0111:DFEA:AAAA'))

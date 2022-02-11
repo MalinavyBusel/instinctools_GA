@@ -1,6 +1,7 @@
 lst = [(0, 'h'), (4, 'o'), (2, 'l'), (1, 'e'), (3, 'l')]
 
 
+# Проверяет правильность данных
 def checker(given_list):
     starts = True
     for elem in given_list:
@@ -13,11 +14,10 @@ def checker(given_list):
         return 'Wrong input. Please, try again.'
 
 
+# Собирает слово
 def repair(given_list):
     my_dict = dict(given_list)
     my_str = ''
     for i in range(len(given_list)):
         my_str += my_dict[i]
     return my_str
-
-

@@ -4,4 +4,5 @@ def latin(quote):
     return ' '.join(parts)
 
 
-print(latin('Carum eSt qUoD  Rarum EST'))
+if __name__ == '__main__':
+    print(latin('Carum eSt qUoD  Rarum EST'))

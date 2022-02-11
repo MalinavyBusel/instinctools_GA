@@ -11,4 +11,5 @@ def cities(city_str):
     return lst
 
 
-print(cities(txt))
+if __name__ == '__main__':
+    print(cities(txt))

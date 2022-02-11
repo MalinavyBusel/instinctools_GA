@@ -36,4 +36,5 @@ def days():
         return f'Вам осталось ждать {to_wait} дней.'
 
 
-print(days())
+if __name__ == '__main__':
+    print(days())

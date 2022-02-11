@@ -4,4 +4,5 @@ def years_diff(date1, date2):
     return abs(year1-year2)
 
 
-print(years_diff('2001/14/11', '2022/10/02'))
+if __name__ == '__main__':
+    print(years_diff('2001/14/11', '2022/10/02'))
