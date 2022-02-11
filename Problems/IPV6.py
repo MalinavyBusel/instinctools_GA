@@ -1,6 +1,6 @@
 def IP(ip):
     total_sum = ''
-    parts = ip.split(':')
+    parts = ip.split(ip[4])
     for part in parts:
         summed = 0
         for elem in part:
