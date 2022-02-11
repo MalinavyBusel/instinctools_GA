@@ -26,8 +26,17 @@ class Days(Enum):
 
 
 def days():
-    day = input('Введите день недели: ')
-    to_wait = eval(f'Days.{day.lower()}.value')
+    accepted = {'sunday', 'вс', 'воскресенье', 'saturday', 'сб', 'суббота', 'friday', 'пт', 'пятница', 'чт',
+                'четверг', 'ср', 'среда', 'вт', 'вторник', 'пн',
+                'понедельник', 'monday', 'tuesday', 'wednesday', 'thursday'}
+    day = input('Введите день недели: ').lower()
+
+    # При надобности могу сделать без eval, но тогда, наверное, придется убрать Enum
+    if day in accepted:
+        to_wait = eval(f'Days.{day}.value')
+    else:
+        print('Введите день корректно!')
+        return days()
     if to_wait == 1:
         return 'Вам осталось ждать 1 день.'
     elif to_wait in [2, 3, 4, ]:
