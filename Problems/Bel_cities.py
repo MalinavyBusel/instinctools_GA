@@ -2,11 +2,11 @@ txt = 'Minsk ibh KHlgs grODno lslnn Vitebsk'
 
 
 def cities(city_str):
-    my_cities = {'brest': 1, 'grodno': 1, 'gomel': 1, 'mogilev': 1, 'vitebsk': 1, 'minsk': 1, }
+    my_cities = {'brest', 'grodno', 'gomel', 'mogilev', 'vitebsk', 'minsk', }
     lst = []
     input_list = city_str.split()
     for elem in input_list:
-        if my_cities.setdefault(elem.lower(), 0):
+        if elem.lower() in my_cities:
             lst.append(elem)
     return lst
 
