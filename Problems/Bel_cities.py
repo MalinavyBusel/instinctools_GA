@@ -1,4 +1,4 @@
-txt = 'Minsk ibh KHlgs grODno lslnn Vitebsk'
+txt = 'Minsk ibh KHlgs grODno lslnn Vitebssk'
 
 
 def cities(city_str):
