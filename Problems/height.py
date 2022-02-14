@@ -1,11 +1,11 @@
 def height(classmates):
-    vovochka = int(input('Возраст Вовы равен: '))
-    classmates.append(vovochka)
+    boy = int(input('The age of Vova is: '))
+    classmates.append(boy)
     classmates = sorted(classmates)
     classmates.reverse()
 
-    # !!! Нумерация начинается с единицы !!!
-    position = classmates.index(vovochka) + classmates.count(vovochka)
+    # !!! Enumeration starts with 1 !!!
+    position = classmates.index(boy) + classmates.count(boy)
     print(classmates)
     return position
 
