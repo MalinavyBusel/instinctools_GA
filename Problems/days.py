@@ -28,11 +28,9 @@ def days(my_days: dict):
 
     to_wait = my_days.setdefault(day, 'smth')
     if to_wait == 1:
-        return 'Вам осталось ждать 1 день.'
-    elif to_wait in [2, 3, 4, ]:
-        return f'Вам осталось ждать {to_wait} дня.'
-    elif to_wait in [5, 6, ]:
-        return f'Вам осталось ждать {to_wait} дней.'
+        return 'You have to wait q day.'
+    elif to_wait in [2, 3, 4, 5, 6]:
+        return f'You have to wait {to_wait} days.'
     else:
         return 'No such day'
 
