@@ -48,9 +48,8 @@ def parse_molecule(formula):
             last = (False, False)
 
     form = ''.join(formlist)  # - Собираем всё в выражение
-    # Examples: :H:H:H:H:O:O
-    # :C:C:H:H:H:H:H:O:H
-    # :Mg:O:H:O:H
+    # ive mistaken. Its smth lith these: 
+    #'H'*2+'O', 'C'*2+'H'*5+'O''H'
 
     # Пока не знаю, как переделать. В принципе, после eval получаю строку, поэтому это не так опасно,
     # но если нужно, то постараюсь придумать, как убрать эту конструкцию
