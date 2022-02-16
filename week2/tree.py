@@ -44,6 +44,7 @@ class DataTree:
                 self.members[parent_id].children.append(child)
             except KeyError:
                 raise ParentNotFound('There is no such id in a tree(parent_id). Please, check the order of args.')
+
         else:
             raise ChildAlreadyExists('The child is already in a tree. Please, check the order of args.')
 
