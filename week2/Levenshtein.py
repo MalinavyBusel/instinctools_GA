@@ -1,7 +1,16 @@
 from collections import Counter
+from enum import Enum
 
 
-def levenshtein(str1, str2, weights: list, logging=False):
+class Actions(Enum):
+    deletion = 'd'
+    insertion = 'i'
+    transposition = 't'
+    replacement = 'r'
+    nothing_to_do = 'n'
+
+
+def levenshtein(origin_string: str, compare_string: str, weights: list, logging: str = False):
     ''' weights:
             replace - weights[0]
             insert - weights[1]
@@ -12,33 +21,33 @@ def levenshtein(str1, str2, weights: list, logging=False):
             "on" - returns (x, y) of table for letter in str1 and reuqired operation for this letter
             "count" - returns the total number of every operation needed(in Counter object)'''
     matrix = []
-    for y in range(len(str1)):
+    for y in range(len(origin_string)):
         matrix.append(list())
-        for x in range(len(str2)):
-            matrix[y].append(distance(x, y, str2, str1, matrix, weights))
+        for x in range(len(compare_string)):
+            matrix[y].append(distance(x, y, compare_string, origin_string, matrix, weights))
     res = matrix[-1][-1][0]
     if logging:
         return res, loggs(matrix, logging)
     return res
 
 
-def loggs(matrix, logging):
-    ''' Returns needed actions with str1(in y) to transform it into str2(in x)'''
+def loggs(matrix: list, logging: str):
+    ''' Returns needed actions with origin_string to transform it into compare_string'''
     str1_logs = {}
     x = len(matrix[0])-1
     y = len(matrix) - 1
     while True:
         action = matrix[y][x][1]
-        if action != 'n':
+        if action != Actions.nothing_to_do:
             str1_logs[(x, y)] = action
-        if action == 'r' or action == 'n':
+        if action == Actions.replacement or action == Actions.nothing_to_do:
             x -= 1
             y -= 1
-        elif action == 'i':
+        elif action == Actions.insertion:
             x -= 1
-        elif action == 'd':
+        elif action == Actions.deletion:
             y -= 1
-        elif action == 't':
+        elif action == Actions.transposition:
             x -= 2
             y -= 2
         if x < 0 and y < 0:
@@ -48,7 +57,7 @@ def loggs(matrix, logging):
     return str1_logs
 
 
-def distance(x, y, str2, str1, matrix, weights):
+def distance(x: int, y: int, str2, str1, matrix: list, weights: list):
     ''' A function to choose the most suitable operation in a definite situation '''
     to_compare = []
 
@@ -82,4 +91,4 @@ def distance(x, y, str2, str1, matrix, weights):
 
 if __name__ == '__main__':
     print(levenshtein('кинотеатр', 'машина', [1, 1, 1, 1], logging='on'))
-    print(levenshtein('карета', 'корона', [1, 1, 1, 1], logging='count'))
+    print(levenshtein('маргарита', 'матрица', [1, 1, 1, 1], logging='count'))
