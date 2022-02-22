@@ -5,18 +5,18 @@ from quick_sort import quick_sort
 from shaking import shaking_sort
 from merge_sort import merge_sort
 
-lst = [randint(-500, 1000) for i in range(3000)]
 
-
-def sort_timer(sorted_list: list):
+def sort_timer(n: int):
+    '''Show actually useful results with n starting from 1000-2000'''
+    lst = [randint(-500, 1000) for i in range(n)]
     start = time()
-    insertion_sort(sorted_list)
+    insertion_sort(lst)
     step1 = time()
-    quick_sort(sorted_list)
+    quick_sort(lst)
     step2 = time()
-    shaking_sort(sorted_list)
+    shaking_sort(lst)
     step3 = time()
-    merge_sort(sorted_list)
+    merge_sort(lst)
     step4 = time()
     insertions = step1 - start
     quick = step2 - step1
@@ -29,4 +29,4 @@ merge_sort: {merge}''')
 
 
 if __name__ == '__main__':
-    print(sort_timer(lst))
+    print(sort_timer(3000))
