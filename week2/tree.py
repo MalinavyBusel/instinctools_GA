@@ -10,7 +10,7 @@ class ChildAlreadyExists(Exception):
 
 
 class DataTree:
-    def __init__(self, file, de_limit, building_type='upstairs'):
+    def __init__(self, file, de_limit: str, building_type='upstairs'):
         self.members = {}
         with open(file) as f:
             reader = csv.reader(f, delimiter=de_limit)
@@ -27,11 +27,11 @@ class DataTree:
                 line_count += 1
             del line_count
 
-    def get_parent(self, id):
+    def get_parent(self, id: str):
         parent = self.members[id].parent
         return parent
 
-    def get_children(self, id):
+    def get_children(self, id: str):
         children = self.members[id].children
         return [child.id for child in children] if children else None
 
