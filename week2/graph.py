@@ -2,7 +2,7 @@ import csv
 
 
 class DataGraph:
-    def __init__(self, file, de_limit):
+    def __init__(self, file, de_limit: str):
         '''Makes a wieghted graph from a csv file.
             csv file contains 3 columns.
             columns 1, 2 - node ids
@@ -21,7 +21,7 @@ class DataGraph:
                     node2.neighbours[id1] = int(price)
                 line_count += 1
 
-    def distance(self, start_id, finish_id):
+    def distance(self, start_id: str, finish_id: str):
         '''Finding the shortest way using the deicstra algorithm'''
         costs = dict()
         parents = dict()
@@ -30,7 +30,7 @@ class DataGraph:
 
         # making up the tables of node_costs and their parents
         for node_id in self.members.keys():
-            if self.members[start_id].neighbours.get(node_id, 'no_way') != 'no_way':
+            if self.members[start_id].neighbours.get(node_id):
                 costs[node_id] = self.members[start_id].neighbours[node_id]
                 parents[node_id] = start_id
             else:
