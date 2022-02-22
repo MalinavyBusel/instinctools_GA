@@ -16,7 +16,7 @@ def queue_time(people, number_of_registers):
 
 
 if __name__ == '__main__':
-    print(queue_time([7, 5, 2, 3, 3, 1, 2, 6, 6, 8, 4, 3], 3))
-    print(queue_time([5, 3, 4], 1))
-    print(queue_time([10, 2, 3, 3], 2))
-    print(queue_time([2, 3, 10], 2))
+    assert queue_time([7, 5, 2, 3, 3, 1, 2, 6, 6, 8, 4, 3], 3) == 17
+    assert queue_time([5, 3, 4], 1) == 12
+    assert queue_time([10, 2, 3, 3], 2) == 10
+    assert queue_time([2, 3, 10], 2) == 12
