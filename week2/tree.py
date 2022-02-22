@@ -16,8 +16,7 @@ class DataTree:
             reader = csv.reader(f, delimiter=de_limit)
 
             line_count = 0
-            for row in reader:
-                id, type_id = row
+            for id, type_id in reader:
                 if line_count > 0 and type_id != '':
                     val1 = id if building_type == 'upstairs' else type_id
                     val2 = type_id if building_type == 'upstairs' else id
@@ -59,8 +58,9 @@ class TreeNode:
 
 
 if __name__ == '__main__':
-    My_tree1 = DataTree('tree1.csv', ';', building_type='downstairs')
+    My_tree1 = DataTree('tree1.csv', ';', building_type='upstairs')
     print(My_tree1.get_parent('4'))
+    My_tree1.add_a_child('0', '10')
     print(My_tree1.get_children('0'))
 
     My_tree2 = DataTree('tree2.csv', ';', building_type='downstairs')
