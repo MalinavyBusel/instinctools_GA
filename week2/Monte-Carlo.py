@@ -12,5 +12,5 @@ def get_pi(total=10000):
     return in_circle/total*4
 
 
-if __name__ == __main__:
+if __name__ == '__main__':
     print(get_pi())
