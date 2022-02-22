@@ -38,16 +38,16 @@ def loggs(matrix: list, logging: str):
     y = len(matrix) - 1
     while True:
         action = matrix[y][x][1]
-        if action != Actions.nothing_to_do:
+        if action != Actions.nothing_to_do.value:
             str1_logs[(x, y)] = action
-        if action == Actions.replacement or action == Actions.nothing_to_do:
+        if action == Actions.replacement.value or action == Actions.nothing_to_do.value:
             x -= 1
             y -= 1
-        elif action == Actions.insertion:
+        elif action == Actions.insertion.value:
             x -= 1
-        elif action == Actions.deletion:
+        elif action == Actions.deletion.value:
             y -= 1
-        elif action == Actions.transposition:
+        elif action == Actions.transposition.value:
             x -= 2
             y -= 2
         if x < 0 and y < 0:
