@@ -1,4 +1,4 @@
-def queue_time(people, number_of_registers):
+def queue_time(people: list, number_of_registers: int):
     # reversing the list to make the deletions faster
     people.reverse()
     cash_registers = []

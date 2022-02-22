@@ -1,4 +1,4 @@
-def insertion_sort(iterable):
+def insertion_sort(iterable: list):
     iter_output = []
     iter_output.append(iterable.pop())  # taking element from the end in order not to move other elements to the start
     # Going through the list and sorting it
@@ -10,7 +10,7 @@ def insertion_sort(iterable):
 
 
 # Using binary search, define the place to insert the num
-def binary(num, start, stop, iterable_to_out):
+def binary(num: int, start: int, stop: int, iterable_to_out: list):
     # Base case
     if stop - start == 1:
         if num >= iterable_to_out[start]:

@@ -60,13 +60,13 @@ class DataGraph:
             unused_nodes.remove(min_id)
         return costs.get(finish_id, None)
 
-    def get_neighbours(self, id):
+    def get_neighbours(self, id: str):
         neighbours = self.members[id].neighbours
         return [neighbour.id for neighbour in neighbours.values()]
 
 
 class GraphNode:
-    def __init__(self, id):
+    def __init__(self, id: str):
         self.id = id
         self.neighbours = {}
 

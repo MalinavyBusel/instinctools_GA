@@ -1,4 +1,4 @@
-def merge_sort(nums):
+def merge_sort(nums: list):
     if len(nums) > 1:
         mid = len(nums)//2
         left = nums[:mid]

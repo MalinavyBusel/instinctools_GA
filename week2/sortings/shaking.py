@@ -1,4 +1,4 @@
-def shaking_sort(iterable):
+def shaking_sort(iterable: list):
     i, j = 0, len(iterable)
     while i < j:
         for k in range(i, j - 1):

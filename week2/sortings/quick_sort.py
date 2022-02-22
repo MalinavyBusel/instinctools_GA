@@ -1,4 +1,4 @@
-def quick_sort(iterable):
+def quick_sort(iterable: list):
     if len(iterable) < 2:
         return iterable
     else:
