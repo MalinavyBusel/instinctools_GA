@@ -90,5 +90,5 @@ def distance(x: int, y: int, str2, str1, matrix: list, weights: list):
 
 
 if __name__ == '__main__':
-    print(levenshtein('кинотеатр', 'машина', [1, 1, 1, 1], logging='on'))
-    print(levenshtein('маргарита', 'матрица', [1, 1, 1, 1], logging='count'))
+    assert levenshtein('кинотеатр', 'машина', [1, 1, 1, 1]) == 8
+    assert levenshtein('маргарита', 'матрица', [1, 1, 1, 1]) == 4

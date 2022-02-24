@@ -29,8 +29,9 @@ class DataGraph:
         parents[start_id] = None
 
         # making up the tables of node_costs and their parents
+        empty = object()
         for node_id in self.members.keys():
-            if self.members[start_id].neighbours.get(node_id):
+            if self.members[start_id].neighbours.get(node_id, empty) is not empty:
                 costs[node_id] = self.members[start_id].neighbours[node_id]
                 parents[node_id] = start_id
             else:
@@ -76,4 +77,4 @@ class GraphNode:
 
 if __name__ == '__main__':
     My_graph1 = DataGraph('graph.csv', ';')
-    print(My_graph1.distance('4', '6'))
+    assert My_graph1.distance('4', '6') == 7
