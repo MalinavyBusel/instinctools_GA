@@ -10,14 +10,13 @@ class ChildAlreadyExists(Exception):
 
 
 class DataTree:
-    def __init__(self, file, de_limit, building_type='upstairs'):
+    def __init__(self, file, de_limit: str, building_type='upstairs'):
         self.members = {}
         with open(file) as f:
             reader = csv.reader(f, delimiter=de_limit)
 
             line_count = 0
-            for row in reader:
-                id, type_id = row
+            for id, type_id in reader:
                 if line_count > 0 and type_id != '':
                     val1 = id if building_type == 'upstairs' else type_id
                     val2 = type_id if building_type == 'upstairs' else id
@@ -28,11 +27,11 @@ class DataTree:
                 line_count += 1
             del line_count
 
-    def get_parent(self, id):
+    def get_parent(self, id: str):
         parent = self.members[id].parent
         return parent
 
-    def get_children(self, id):
+    def get_children(self, id: str):
         children = self.members[id].children
         return [child.id for child in children] if children else None
 
@@ -58,10 +57,13 @@ class TreeNode:
         return self.id
 
 
-My_tree1 = DataTree('tree1.csv', ';', building_type='downstairs')
-print(My_tree1.get_parent('4'))
-print(My_tree1.get_children('0'))
+if __name__ == '__main__':
+    My_tree1 = DataTree('tree1.csv', ';', building_type='upstairs')
+    print(My_tree1.get_parent('4'))
+    My_tree1.add_a_child('0', '10')
+    print(My_tree1.get_children('0'))
 
-My_tree2 = DataTree('tree2.csv', ';', building_type='downstairs')
-print(My_tree2.get_parent('4'))
-print(My_tree2.get_children('0'))
+    My_tree2 = DataTree('tree2.csv', ';', building_type='downstairs')
+    print(My_tree2.get_parent('4'))
+    My_tree2.add_a_child('0', '10')
+    print(My_tree2.get_children('0'))
