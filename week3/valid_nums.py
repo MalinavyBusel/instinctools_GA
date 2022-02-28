@@ -1,3 +1,6 @@
+from operator import *
+
+
 input_dict = {'sum': {'min': 5, 'max': 50},
               'div': {'min': 2, 'max': 10},
               'diff': {'min': 5, 'max': 20}}
@@ -8,13 +11,14 @@ class NotValidInputNumbers(Exception):
 
 
 def nums_validator(num1: int, num2: int, input_dict: dict):
-    res_dict = {'sum': num1+num2,
-                'div': num1/num2,
-                'diff': num1-num2,
-                'mult': num1*num2}
+    res_dict = {'sum': add,
+                'div': truediv,
+                'diff': sub,
+                'mult': mul,
+                'expon': pow}
     rangeouts = ''
     for key in input_dict.keys():
-        res = res_dict[key]
+        res = res_dict[key](num1, num2)
         r_min = input_dict[key]['min']
         r_max = input_dict[key]['max']
         if out_of_range(res, r_min, r_max):
@@ -33,4 +37,4 @@ def out_of_range(num, minimal, maximum, soft=True):
         return any([num < minimal, num > maximum])
 
 
-nums_validator(5000, 1, input_dict)
+nums_validator(500, 100, input_dict)
