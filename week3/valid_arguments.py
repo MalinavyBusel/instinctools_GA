@@ -1,8 +1,10 @@
+from typing import Callable
+
 class NotValidArguments(Exception):
     pass
 
 
-def validator(func):
+def validator(func: Callable):
     import inspect
 
     def wrapper(*args):

@@ -1,15 +1,20 @@
 from time import perf_counter
+from typing import Optional, Type
+from types import TracebackType
 
 
 class Timer:
     def __init__(self):
-        self.total_time = 0.0
+        self.total_time = float('nan')
 
     def __enter__(self):
         self.start = perf_counter()
         self.end = 0.0
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self,
+                 exc_type: Optional[Type[BaseException]],
+                 exc_val: Optional[BaseException],
+                 exc_tb: Optional[TracebackType]):
         self.end = perf_counter()
         self.total_time = self.end - self.start
 

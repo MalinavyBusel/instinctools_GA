@@ -1,3 +1,7 @@
+from typing import Optional, Type
+from types import TracebackType
+
+
 class AppendToLockedError(PermissionError):
     pass
 
@@ -18,7 +22,10 @@ class Storage:
         else:
             self.unlock()
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self,
+                 exc_type: Optional[Type[BaseException]],
+                 exc_val: Optional[BaseException],
+                 exc_tb: Optional[TracebackType]):
         self.lock()
 
     def lock(self):
