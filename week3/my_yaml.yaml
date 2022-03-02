@@ -1,0 +1,33 @@
+'sum':
+      'min': 5
+      'max': 50
+'div':
+      'min': 2
+      'max': 10
+'diff':
+      'min': 5
+      'max': 20
+'mult':
+      'min': 5
+      'max': 50
+'expon':
+      'min': 5
+      'max': 100
+'floordiv':
+      'min': 5
+      'max': 50
+'and':
+      'min': 5
+      'max': 5
+'xor':
+      'min': 10
+      'max': 10
+'or':
+      'min': 10
+      'max': 10
+'is':
+      'min': 0
+      'max': 0
+'is_not':
+      'min': 1
+      'max': 1
