@@ -8,7 +8,7 @@ class Point3D:
         return f'({self.x}, {self.y}, {self.z})'
 
     # How can I annotate the type of argument "other"(Point3D instance)?
-    def distance(self, other: object) -> int:
+    def distance(self, other: 'Point3D') -> int:
         dist = ((self.x-other.x)**2+(self.y-other.y)**2+(self.z-other.z)**2)**0.5
         return dist
 

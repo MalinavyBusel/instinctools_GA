@@ -1,11 +1,12 @@
 from random import randint
+from typing import *
 
 
 class Attribute:
     def __set_name__(self, owner, name):
         self.name = name
 
-    def __get__(self, instance, owner):
+    def __get__(self, instance: ClassVar, owner):
         print(f'Getting ready to use {self.name} in a fight.')
         success_chance = randint(4, 10)
         if success_chance >= 9:
@@ -14,7 +15,7 @@ class Attribute:
         print(f'The total power of your attack is {res}.')
         return res
 
-    def __set__(self, instance, value):
+    def __set__(self, instance: ClassVar, value: int):
         print(f'Your {self.name} is now {value}.')
         instance.__dict__[self.name] = value
         return value
@@ -52,12 +53,13 @@ class Avatar:
             print(f"There is no such talent as {item}. ")
         return 0
 
-    def show_attr(self, name):
+    def show_attr(self, name: str):
         res = self.__getitem__(name)
         if res:
             print(f'Your {name} talent is {res}')
         if res != 10:
             print('Can be upgraded. ')
+        return None
 
 
 if __name__ == '__main__':

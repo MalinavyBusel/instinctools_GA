@@ -8,6 +8,7 @@ class BankAccount:
         self.__balance += dep_money
         print(f'The sum of {dep_money} added to your account.\n'
               f'The current balance is {self.__balance}.')
+        return None
 
     def withdrawal(self, withdraw_money: float):
         if self.__balance - withdraw_money < 0:
@@ -17,13 +18,16 @@ class BankAccount:
             print(f'The sum of {withdraw_money} was successfully'
                   'withdrew from your account.\n'
                   f'The current balance is {self.__balance}.')
+        return None
 
     def apply_fees(self, fee: int = 5):
         self.__balance -= self.__balance*fee/100
+        return None
 
     def display(self):
         print(f'Owner: {self.__name.title()};\n'
               f'balance: {round(self.__balance, 2)}')
+        return None
 
 
 if __name__ == '__main__':

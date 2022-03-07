@@ -16,12 +16,7 @@ class Order:
         self.total_price = 0.0
         self.to_pay = 0.0
         self.total_mass = 0.0
-        for key in input_dishes.keys():
-            amount = input_dishes[key]
-            self.dishes[key.name] += amount
-            self.total_price += key.price * amount
-            self.to_pay += key.price * amount
-            self.total_mass += key.mass * amount
+        self.add_dishes(input_dishes)
 
     def add_dishes(self, input_dishes: dict):
         for key in input_dishes.keys():
@@ -30,6 +25,7 @@ class Order:
             self.total_price += key.price * amount
             self.to_pay += key.price * amount
             self.total_mass += key.mass * amount
+        return None
 
     def pay(self, money: float):
         if self.to_pay < money:
@@ -44,6 +40,7 @@ class Order:
         else:
             self.to_pay -= money
             print(f'Thanks. There are {self.to_pay} dollars still to be paid.')
+        return None
 
     def info(self):
         print('----------')
@@ -54,6 +51,7 @@ class Order:
         for dish, amount in self.dishes.items():
             print(f'{dish} - {amount}')
         print('----------\n')
+        return None
 
 
 if __name__ == '__main__':
