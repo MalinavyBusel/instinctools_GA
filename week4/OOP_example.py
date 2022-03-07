@@ -7,10 +7,13 @@
 # этого же класса
 
 
+from dataclasses import dataclass
+
+
+@dataclass
 class Student:
-    def __init__(self, name: str, grade: int = 5):
-        self.name = name
-        self.grade = grade
+    name: str
+    grade: int = 5
 
     def __str__(self):
         return self.name

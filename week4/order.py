@@ -1,11 +1,12 @@
 from collections import defaultdict
+from dataclasses import dataclass
 
 
+@dataclass
 class Dish:
-    def __init__(self, name: str, price: float, mass: float):
-        self.name = name
-        self.price = price
-        self.mass = mass
+    name: str
+    price: float
+    mass: float
 
 
 class Order:

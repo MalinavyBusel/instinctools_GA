@@ -1,16 +1,13 @@
 import pathlib
+from dataclasses import dataclass
 
 
+@dataclass
 class Sequence:
-    def __init__(self,
-                 fasta_id: str,
-                 description: str,
-                 comments: str,
-                 sequence: str):
-        self.id = fasta_id
-        self.description = description
-        self.comments = comments
-        self.sequence = sequence
+    id: str
+    description: str
+    comments: str
+    sequence: str
 
 
 class FastaParser:
