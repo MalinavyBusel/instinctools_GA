@@ -3,6 +3,7 @@ import os
 
 from dotenv import load_dotenv
 
+
 load_dotenv()
 host, port = os.environ.get('HOST_AND_PORT').split(':')
 HOST = str(host)
