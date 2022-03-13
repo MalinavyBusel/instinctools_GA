@@ -2,6 +2,8 @@ import os
 import pprint
 import yaml
 import json
+
+from yaml.scanner import ScannerError
 from sys import argv
 
 
@@ -17,14 +19,15 @@ def outro_dir_through(path_, dirname):
         content_path = os.path.join(n_path, content)
         if os.path.isdir(content_path):
             dir_through(n_path, content, n_dict_part)
-        elif '.json' in content:
+        else:
             with open(content_path, 'r') as f:
-                loaded_f = json.load(f)
-            n_dict_part[content] = loaded_f
-        elif '.yaml' in content:
-            with open(content_path, 'r') as f:
-                loaded_f = yaml.safe_load(f)
-            n_dict_part[content] = loaded_f
+                try:
+                    # yaml.safe_load also reads json content, so, I think,
+                    # there is no need in parsing file with json.load()
+                    loaded_f = yaml.safe_load(f)
+                    n_dict_part[content] = loaded_f
+                except ScannerError:
+                    pass
         with open('yaml_listdir.yaml', 'a+') as f:
             if n_dict_part:
                 yaml.dump(n_dict_part, f, default_flow_style=False)
@@ -39,14 +42,13 @@ def dir_through(path_, dirname, dict_part):
         content_path = os.path.join(n_path, content)
         if os.path.isdir(content_path):
             dir_through(n_path, content, n_dict_part)
-        elif '.json' in content:
+        else:
             with open(content_path, 'r') as f:
-                loaded_f = json.load(f)
-            n_dict_part[content] = loaded_f
-        elif '.yaml' in content:
-            with open(content_path, 'r') as f:
-                loaded_f = yaml.safe_load(f)
-            n_dict_part[content] = loaded_f
+                try:
+                    loaded_f = yaml.safe_load(f)
+                    n_dict_part[content] = loaded_f
+                except ScannerError:
+                    pass
 
 
 dir_path = argv[1]
