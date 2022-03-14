@@ -25,7 +25,10 @@ def outro_dir_through(path_, dirname):
                     # yaml.safe_load also reads json content, so, I think,
                     # there is no need in parsing file with json.load()
                     loaded_f = yaml.safe_load(f)
-                    n_dict_part[content] = loaded_f
+                    # the safe_load here is used only for checking the file
+                    # for appropriate content in it.
+                    data = f.read()
+                    n_dict_part[content] = data
                 except ScannerError:
                     pass
         with open('yaml_listdir.yaml', 'a+') as f:
@@ -46,7 +49,8 @@ def dir_through(path_, dirname, dict_part):
             with open(content_path, 'r') as f:
                 try:
                     loaded_f = yaml.safe_load(f)
-                    n_dict_part[content] = loaded_f
+                    data = f.read()
+                    n_dict_part[content] = data
                 except ScannerError:
                     pass
 
