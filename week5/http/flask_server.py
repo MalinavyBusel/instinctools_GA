@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, redirect, url_for
-from calculations import calculate
+from instinctools_GA.week5.calculations import calculate, opers
 from collections import deque
 app = Flask(__name__)
 
@@ -9,12 +9,13 @@ history = deque(maxlen=5)
 
 @app.route("/", methods=['GET', 'POST'])
 def start():
-    if request.method == 'POST':
-        return redirect(url_for('calculator'))
+    return '''<a href="calculator">Calculator</a>
+<a href="operations">Operations</a>'''
 
-    return '''<form method="POST">
-               <input type="submit" value="Calculator">
-           </form>'''
+
+@app.route("/operations")
+def operations():
+    return f'''{opers}'''
 
 
 @app.route('/calculator', methods=['GET', 'POST'])
@@ -23,7 +24,8 @@ def calculator():
            <form method="POST">
                <div><label>Expression: <input type="text" name="expr"></label></div>
                <input type="submit" value="Solve">
-           </form>'''
+           </form>
+           <a href="operations">Operations</a>'''
 
     # handle the POST request
     if request.method == 'POST':
