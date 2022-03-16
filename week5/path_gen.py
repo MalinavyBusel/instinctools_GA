@@ -14,8 +14,10 @@ def checker(data_dict: dict, dir_name: str):
     os.mkdir(dir_name)
     for key, value in data_dict.items():
         n_dir_name = os.path.join(dir_name, key)
+
         if type(value) == dict:
             checker(data_dict[key], n_dir_name)
+
         else:
             with open(n_dir_name, 'w') as f:
                 if value[0] == 'yaml':
