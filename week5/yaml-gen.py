@@ -19,15 +19,19 @@ def outro_dir_through(path_: str, dirname: str):
         if os.path.isdir(content_path):
             dir_through(n_path, content, n_dict_part)
         else:
-            with open(content_path, 'r') as f:
+            with open(content_path, 'r+') as f:
                 try:
-                    # yaml.safe_load also reads json content, so, I think,
-                    # there is no need in parsing file with json.load()
                     loaded_f = yaml.safe_load(f)
-                    # the safe_load here is used only for checking the file
-                    # for appropriate content in it.
                     if loaded_f:
-                        n_dict_part[content] = [loaded_f]
+                        n_dict_part[content] = ['yaml', loaded_f]
+                except:
+                    pass
+                try:
+                    f.seek(0, 0)
+                    data = f.read()
+                    loaded_j = json.loads(data)
+                    if loaded_j:
+                        n_dict_part[content] = ['json', loaded_j]
                 except:
                     pass
         with open('yaml_listdir.yaml', 'a+') as f:
@@ -45,11 +49,19 @@ def dir_through(path_: str, dirname: str, dict_part: dict):
         if os.path.isdir(content_path):
             dir_through(n_path, content, n_dict_part)
         else:
-            with open(content_path, 'r') as f:
+            with open(content_path, 'r+') as f:
                 try:
                     loaded_f = yaml.safe_load(f)
                     if loaded_f:
-                        n_dict_part[content] = [loaded_f]
+                        n_dict_part[content] = ['yaml', loaded_f]
+                except:
+                    pass
+                try:
+                    f.seek(0, 0)
+                    data = f.read()
+                    loaded_j = json.loads(data)
+                    if loaded_j:
+                        n_dict_part[content] = ['json', loaded_j]
                 except:
                     pass
 
