@@ -1,15 +1,17 @@
+import json
 from operator import *
 from math import *
 
 
-oper_dict = {'sum': add, 'div': truediv, 'diff': sub,
-             'mult': mul, 'expon': pow, 'floordiv': floordiv,
+oper_dict = {'add': add, 'truediv': truediv, 'sub': sub,
+             'mul': mul, 'pow': pow, 'floordiv': floordiv,
              'and': and_, 'xor': xor, 'or': or_,
              'is': is_, 'is_not': is_not, 'lshift': lshift,
-             'mod': mod, 'rshift': rshift, '<': lt, '<=': le,
-             '==': eq, '!=': ne, '>': gt, '>=': ge, 'hypot': hypot,
-             'atan': atan2, 'ldexp': ldexp}
-opers = set(oper_dict.keys())
+             'mod': mod, 'rshift': rshift, 'lt': lt, 'le': le,
+             'eq': eq, 'ne': ne, 'gt': gt, 'ge': ge, 'hypot': hypot,
+             'atan2': atan2, 'ldexp': ldexp}
+opers = json.dumps(list(oper_dict.keys()), indent=0)
+
 
 def calculate(expression: str):
     try:
