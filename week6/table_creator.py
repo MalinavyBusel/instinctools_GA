@@ -24,7 +24,7 @@ DATABASE = {
     'host': 'localhost',
     'port': '5432',
     'username': 'postgres',
-    'password': '0987612345357e',
+    'password': 'mypassword)',
     'database': 'calculations'
 }
 
