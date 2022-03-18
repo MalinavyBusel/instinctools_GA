@@ -3,13 +3,13 @@ from operator import *
 from math import *
 
 
-oper_dict = {'add': add, 'truediv': truediv, 'sub': sub,
-             'mul': mul, 'pow': pow, 'floordiv': floordiv,
-             'and': and_, 'xor': xor, 'or': or_,
-             'is': is_, 'is_not': is_not, 'lshift': lshift,
-             'mod': mod, 'rshift': rshift, 'lt': lt, 'le': le,
-             'eq': eq, 'ne': ne, 'gt': gt, 'ge': ge, 'hypot': hypot,
-             'atan2': atan2, 'ldexp': ldexp}
+oper_dict = {"add": add, "truediv": truediv, "sub": sub,
+             "mul": mul, "pow": pow, "floordiv": floordiv,
+             "and": and_, "xor": xor, "or": or_,
+             "is": is_, "is_not": is_not, "lshift": lshift,
+             "mod": mod, "rshift": rshift, "lt": lt, "le": le,
+             "eq": eq, "ne": ne, "gt": gt, "ge": ge, "hypot": hypot,
+             "atan2": atan2, "ldexp": ldexp}
 opers_list = list(oper_dict.keys())
 opers = json.dumps(opers_list, indent=0)
 
