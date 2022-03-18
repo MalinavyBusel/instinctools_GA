@@ -10,7 +10,8 @@ oper_dict = {'add': add, 'truediv': truediv, 'sub': sub,
              'mod': mod, 'rshift': rshift, 'lt': lt, 'le': le,
              'eq': eq, 'ne': ne, 'gt': gt, 'ge': ge, 'hypot': hypot,
              'atan2': atan2, 'ldexp': ldexp}
-opers = json.dumps(list(oper_dict.keys()), indent=0)
+opers_list = list(oper_dict.keys())
+opers = json.dumps(opers_list, indent=0)
 
 
 def calculate(expression: str):
