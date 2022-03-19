@@ -39,14 +39,12 @@ def add_data(session: 'Session', expression: str, res: float):
 def get_data(session: 'Session', oper: str, limit: str, offset: str):
     offs = int(offset) if offset else 0
     lim = int(limit) if limit else 0
-    if oper and lim:
-        return session.query(Post).filter(Post.operator == oper).limit(lim).offset(offs).all()
-    elif lim:
-        return session.query(Post).filter().limit(lim).offset(offs).all()
-    elif oper:
-        return session.query(Post).filter(Post.operator == oper).offset(offs).all()
-    else:
-        return session.query(Post).filter().offset(offs).all()
+    query = session.query(Post).offset(offs)
+    if lim:
+        query = query.limit(lim)
+    if oper:
+        query = query.filter(Post.operator == oper)
+    return query.all()
 
 
 # smth = 0
