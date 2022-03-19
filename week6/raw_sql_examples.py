@@ -1,5 +1,8 @@
 import psycopg2
 
+from sqlalchemy import text
+
+from instinctools_GA.week6.table_creator import Post
 from instinctools_GA.week5.config import settings
 
 
@@ -22,3 +25,9 @@ GROUP BY operator''')
 cur.execute('''SELECT operator, CAST(COUNT(operator)/(SELECT COUNT(*) FROM operations)*100 AS INT)
 FROM operations
 GROUP BY operator''')
+
+# Here is a variant of raw request using SQLAlchemy. Is it correct?
+my_request = '''SELECT operator, COUNT(operator)
+FROM operations
+GROUP BY operator'''
+query = session.query(Post).filter(text(my_request)).all()
