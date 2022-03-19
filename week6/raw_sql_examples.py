@@ -19,6 +19,6 @@ FROM operations
 GROUP BY operator''')
 
 # 4
-cur.execute('''SELECT operator, CAST(COUNT(operator)/(SELECT COUNT(*) FROM operations) AS INT)
+cur.execute('''SELECT operator, CAST(COUNT(operator)/(SELECT COUNT(*) FROM operations)*100 AS INT)
 FROM operations
 GROUP BY operator''')
