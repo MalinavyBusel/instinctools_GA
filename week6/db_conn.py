@@ -3,15 +3,10 @@ from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker
 
 from instinctools_GA.week6.table_creator import Post
+from instinctools_GA.week5.config import settings
 
-DATABASE = {
-    'drivername': 'postgresql',
-    'host': 'localhost',
-    'port': '5432',
-    'username': 'postgres',
-    'password': 'mypassword)',
-    'database': 'calculations'
-}
+
+DATABASE = settings.DATABASE
 
 
 def connect_to_db(db_data: dict = DATABASE) -> 'Session':
@@ -45,10 +40,3 @@ def get_data(session: 'Session', oper: str, limit: str, offset: str):
     if oper:
         query = query.filter(Post.operator == oper)
     return query.all()
-
-
-# smth = 0
-# session = connect_to_db()
-# for post in session.query(Post).filter().all():
-#     print(post.operator, post.result)
-# Post.id >= 1 if not smth else Post.operator == smth
