@@ -26,7 +26,7 @@ cur.execute('''SELECT operator, CAST(COUNT(operator)/(SELECT COUNT(*) FROM opera
 FROM operations
 GROUP BY operator''')
 
-# Here is a variant of raw request using SQLAlchemy. Is it correct?
+# Here is a variant of raw request using SQLAlchemy. Is it also correct?
 my_request = '''SELECT operator, COUNT(operator)
 FROM operations
 GROUP BY operator'''
