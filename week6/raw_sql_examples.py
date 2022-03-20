@@ -26,6 +26,20 @@ cur.execute('''SELECT operator, CAST(COUNT(operator)/(SELECT COUNT(*) FROM opera
 FROM operations
 GROUP BY operator''')
 
+# 5
+cur.execute('''SELECT operator, SUM(dupl) AS duplicated_count
+FROM (SELECT operator, number1, number2, COUNT(id)-1 as dupl, COUNT(id) AS total
+FROM operations
+GROUP BY operator, number1, number2) AS tab1
+GROUP BY operator
+UNION 
+SELECT COUNT(*) as unique_count
+FROM (SELECT operator, number1, number2, COUNT(id)
+FROM operations
+GROUP BY operator, number1, number2
+HAVING COUNT(id) =1) AS tab1
+GROUP BY operator''')
+
 # Here is a variant of raw request using SQLAlchemy. Is it also correct?
 my_request = '''SELECT operator, COUNT(operator)
 FROM operations
