@@ -1,6 +1,6 @@
 """mult_index
 
-Revision ID: f33649d85c41
+Revision ID: ch8e7g0v29i11
 Revises:
 Create Date: 2022-03-21 21:39:34.384926
 
