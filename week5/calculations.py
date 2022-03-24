@@ -1,16 +1,10 @@
 import json
-from operator import *
-from math import *
 
+from instinctools_GA.week5.config import settings
 
-oper_dict = {'add': add, 'truediv': truediv, 'sub': sub,
-             'mul': mul, 'pow': pow, 'floordiv': floordiv,
-             'and': and_, 'xor': xor, 'or': or_,
-             'is': is_, 'is_not': is_not, 'lshift': lshift,
-             'mod': mod, 'rshift': rshift, 'lt': lt, 'le': le,
-             'eq': eq, 'ne': ne, 'gt': gt, 'ge': ge, 'hypot': hypot,
-             'atan2': atan2, 'ldexp': ldexp}
-opers = json.dumps(list(oper_dict.keys()), indent=0)
+oper_dict = settings.oper_dict
+opers_list = list(oper_dict.keys())
+opers = json.dumps(opers_list, indent=0)
 
 
 def calculate(expression: str):
