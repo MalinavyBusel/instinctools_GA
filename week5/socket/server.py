@@ -1,9 +1,8 @@
 import socket
 import os
 
-from instinctools_GA.week5.calculations import calculate
+from calculations import calculate
 from dotenv import load_dotenv
-from operator import *
 
 
 load_dotenv()

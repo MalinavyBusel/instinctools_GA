@@ -2,10 +2,8 @@ from operator import *
 from math import *
 
 from pydantic import BaseSettings
-from dataclasses import dataclass
 
 
-@dataclass
 class DatabaseSettings(BaseSettings):
     DATABASE = {
         'drivername': 'postgresql',
@@ -17,7 +15,6 @@ class DatabaseSettings(BaseSettings):
     }
 
 
-@dataclass
 class CalcSettings(BaseSettings):
     oper_dict = {"add": add, "truediv": truediv, "sub": sub,
                  "mul": mul, "pow": pow, "floordiv": floordiv,

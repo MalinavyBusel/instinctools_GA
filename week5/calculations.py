@@ -1,6 +1,6 @@
 import json
 
-from instinctools_GA.week5.config import settings
+from config import settings
 
 oper_dict = settings.oper_dict
 opers_list = list(oper_dict.keys())

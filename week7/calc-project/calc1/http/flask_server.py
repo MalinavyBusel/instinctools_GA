@@ -1,11 +1,10 @@
 import json
-import calc
 
 from flask import Flask
 from flask import request
 from collections import deque
 
-from calc.calculations import calculate, opers
+from calculations import calculate, opers
 from ..db_methods import connect_to_db, add_data, get_data
 
 app = Flask(__name__)
