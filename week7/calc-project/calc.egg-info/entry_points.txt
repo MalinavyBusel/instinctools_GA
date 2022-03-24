@@ -1,0 +1,3 @@
+[console_scripts]
+flask-run = calc.http.flask_server
+socket-run = calc.socket.server
