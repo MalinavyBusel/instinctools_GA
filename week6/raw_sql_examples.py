@@ -2,7 +2,7 @@ import psycopg2
 
 from sqlalchemy import text
 
-from instinctools_GA.week6.table_creator import Post
+from instinctools_GA.week6.data_models import Post
 from instinctools_GA.week5.config import settings
 
 

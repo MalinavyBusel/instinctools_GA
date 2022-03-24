@@ -1,11 +1,11 @@
 import json
 
 from flask import Flask
-from flask import request, redirect, url_for
+from flask import request
 from collections import deque
 
 from instinctools_GA.week5.calculations import calculate, opers
-from instinctools_GA.week6.db_conn import connect_to_db, add_data, get_data
+from instinctools_GA.week6.db_methods import connect_to_db, add_data, get_data
 
 app = Flask(__name__)
 history = deque(maxlen=5)
