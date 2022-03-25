@@ -1,4 +1,4 @@
-sqlalchemy 1.4.32
-pydantic 1.9.0
-python-dotenv 0.19.2
-psycopg2 2.9.3
+sqlalchemy==1.4.32
+pydantic==1.9.0
+python-dotenv==0.19.2
+psycopg2==2.9.3
