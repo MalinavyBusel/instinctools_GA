@@ -1,10 +1,10 @@
-FROM python
-
-RUN pip install flask
-RUN pip install sqlalchemy
-RUN pip install pydantic
-RUN pip install python-dotenv
+FROM python:3
 
 COPY . /calc
 
-CMD python /calc/http/flask-server.py
+RUN pip install -r /calc/requirements.txt
+
+EXPOSE 5000
+EXPOSE 5432
+
+CMD ["python", "/calc/calc2/http/flask-server.py"]
