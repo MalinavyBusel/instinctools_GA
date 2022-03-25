@@ -1,15 +1,11 @@
-import os
 import socket
 
-from dotenv import load_dotenv
-
+from calc_processing.config import settings
 from calc_processing.calculations import calculate
 from calc_processing.db_methods import connect_to_db, add_data
 
-load_dotenv()
-host, port = os.environ.get('HOST_AND_PORT').split(':')
-HOST = str(host)
-PORT = int(port)
+HOST = settings.HOST
+PORT = int(settings.PORT)
 
 session = connect_to_db()
 

@@ -4,6 +4,7 @@ from flask import Flask
 from flask import request
 from collections import deque
 
+from calc_processing.config import settings
 from calc_processing.calculations import calculate, opers
 from calc_processing.db_methods import connect_to_db, add_data, get_data
 
@@ -83,4 +84,5 @@ def calculator():
 
 if __name__ == "__main__":
     session = connect_to_db()
-    app.run()
+    app.run(host=settings.HOST,
+            port=settings.PORT)

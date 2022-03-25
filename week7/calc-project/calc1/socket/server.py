@@ -1,7 +1,7 @@
 import socket
 import os
 
-from calculations import calculate
+from calc_processing.calculations import calculate
 from dotenv import load_dotenv
 
 

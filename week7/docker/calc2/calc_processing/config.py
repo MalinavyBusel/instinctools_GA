@@ -5,9 +5,11 @@ from pydantic import BaseSettings
 
 
 class DatabaseSettings(BaseSettings):
+    HOST = '0.0.0.0'
+    PORT = '5000'
     DATABASE = {
         'drivername': 'postgresql',
-        'host': 'localhost',
+        'host': HOST,
         'port': '5432',
         'username': 'postgres',
         'password': 'mypassword)',

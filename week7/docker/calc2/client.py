@@ -1,13 +1,9 @@
 import socket
-import os
 
-from dotenv import load_dotenv
+from calc_processing.config import settings
 
-
-load_dotenv()
-host, port = os.environ.get('HOST_AND_PORT').split(':')
-HOST = str(host)
-PORT = int(port)
+HOST = settings.HOST
+PORT = int(settings.PORT)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
