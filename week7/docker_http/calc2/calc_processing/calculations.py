@@ -1,6 +1,6 @@
 import json
 
-from .config import settings
+from calc_processing.config import settings
 
 oper_dict = settings.oper_dict
 opers_list = list(oper_dict.keys())

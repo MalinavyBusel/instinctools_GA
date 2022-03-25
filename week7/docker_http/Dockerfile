@@ -7,4 +7,4 @@ RUN pip install -r /calc/requirements.txt
 EXPOSE 5000
 EXPOSE 5432
 
-CMD ["python", "/calc/calc2/http/flask-server.py"]
+CMD ["python", "./calc/calc2/flask_server.py"]

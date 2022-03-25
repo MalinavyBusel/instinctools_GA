@@ -2,8 +2,8 @@ from sqlalchemy.engine.url import URL
 from sqlalchemy import create_engine, Column, Integer, Enum
 from sqlalchemy.ext.declarative import declarative_base
 
-from calculations import opers_list
-from config import settings
+from calc_processing.calculations import opers_list
+from calc_processing.config import settings
 
 
 DATABASE = settings.DATABASE

@@ -2,8 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import sessionmaker, session
 
-from data_models import Post
-from config import settings
+from calc_processing.data_models import Post
+from calc_processing.config import settings
 
 
 DATABASE = settings.DATABASE
