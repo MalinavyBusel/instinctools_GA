@@ -1,8 +1,10 @@
-import socket
 import os
+import socket
 
-from ..calculations import calculate
 from dotenv import load_dotenv
+
+from calculations import calculate
+from db_methods import connect_to_db, add_data, get_data
 
 
 load_dotenv()
@@ -10,6 +12,7 @@ host, port = os.environ.get('HOST_AND_PORT').split(':')
 HOST = str(host)
 PORT = int(port)
 
+session = connect_to_db()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -21,6 +24,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024).decode(encoding='utf-8')
             if not data:
                 break
-            send_data = calculate(data).encode(encoding='utf-8')
+            res_data = calculate(data)
+            res, _, err = res_data.split(':::')
+            res = float(res) if res else float('nan')
+            add_data(session, data, res)
+            send_data = res_data.encode(encoding='utf-8')
             conn.sendall(send_data)
 
