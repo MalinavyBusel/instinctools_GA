@@ -9,11 +9,11 @@ class DatabaseSettings(BaseSettings):
     PORT = '5000'
     DATABASE = {
         'drivername': 'postgresql',
-        'host': HOST,
+        'host': 'host.docker.internal',
         'port': '5432',
         'username': 'postgres',
         'password': 'mypassword)',
-        'database': 'calc'
+        'database': 'calculations'
     }
 
 
