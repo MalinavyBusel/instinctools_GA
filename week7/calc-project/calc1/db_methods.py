@@ -34,9 +34,10 @@ def add_data(session_: session.Session, expression: str, res: float):
 def get_data(session_: session.Session, oper: str, limit: str, offset: str):
     offs = int(offset) if offset else 0
     lim = int(limit) if limit else 0
-    query = session_.query(Post).offset(offs)
-    if lim:
-        query = query.limit(lim)
+    query = session_.query(Post)
     if oper:
         query = query.filter(Post.operator == oper)
+    if lim:
+        query = query.limit(lim)
+    query = query.offset(offs)
     return query.all()
