@@ -11,7 +11,7 @@ class DatabaseSettings(BaseSettings):
         'port': '5432',
         'username': 'postgres',
         'password': 'mypassword)',
-        'database': 'calc'
+        'database': 'calculations'
     }
 
 

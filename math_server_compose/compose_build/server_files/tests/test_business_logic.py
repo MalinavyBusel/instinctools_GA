@@ -3,9 +3,9 @@ from sqlalchemy_utils.functions import database_exists
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from calculations import calculate
-
-from testing_config import settings, Post
+from calc_processing.calculations import calculate
+from calc_processing.config import settings
+from calc_processing.data_models import Post
 
 
 def test_connection():

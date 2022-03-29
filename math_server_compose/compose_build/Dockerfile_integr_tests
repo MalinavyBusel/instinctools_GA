@@ -1,0 +1,11 @@
+FROM python:3
+
+ADD server_files/tests/test_flask.py /testing
+ADD server_files/tests/test_socket.py /testing
+ADD requirements/requirements_integr_tests.txt /testing
+
+RUN pip install -r /testing/requirements_integr_tests.txt
+
+WORKDIR /testing
+
+CMD ["pytest"]

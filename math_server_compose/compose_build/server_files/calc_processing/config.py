@@ -6,7 +6,8 @@ from pydantic import BaseSettings
 
 class ConnectionSettings(BaseSettings):
     HOST = '0.0.0.0'
-    PORT = '65432'
+    F_PORT = '5000'
+    S_PORT = '65432'
 
 
 class DatabaseSettings(BaseSettings):
