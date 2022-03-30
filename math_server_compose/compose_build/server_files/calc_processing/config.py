@@ -4,10 +4,7 @@ from operator import *
 from math import *
 
 from pydantic import BaseSettings
-from dotenv import load_dotenv
-
-
-load_dotenv()
+from decouple import config
 
 
 class ConnectionSettings(BaseSettings):
@@ -17,9 +14,9 @@ class ConnectionSettings(BaseSettings):
 
 
 class DatabaseSettings(BaseSettings):
-    DB = os.environ.get('POSTGRES_DB')
-    DB_USERNAME = os.environ.get('POSTGRES_USER')
-    DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+    DB = config('POSTGRES_DB', cast=str)
+    DB_USERNAME = config('POSTGRES_USER', cast=str)
+    DB_PASSWORD = config('POSTGRES_PASSWORD', cast=str)
     DATABASE = {
         'drivername': 'postgresql',
         'host': 'postgres_container',

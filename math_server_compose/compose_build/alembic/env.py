@@ -8,16 +8,15 @@ from sqlalchemy import pool
 from alembic import context
 
 from sqlalchemy.ext.declarative import declarative_base
-from dotenv import load_dotenv
+from decouple import config as conf
 
 Base = declarative_base()
-load_dotenv()
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-DB = os.environ.get('POSTGRES_DB')
-DB_USERNAME = os.environ.get('POSTGRES_USER')
-DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+DB = conf('POSTGRES_DB', cast=str)
+DB_USERNAME = conf('POSTGRES_USER', cast=str)
+DB_PASSWORD = conf('POSTGRES_PASSWORD', cast=str)
 config = context.config
 config.set_main_option('sqlalchemy.url',
                        f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@postgres_container:5432/{DB}')
