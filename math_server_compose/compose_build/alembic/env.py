@@ -1,3 +1,5 @@
+import os
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -6,13 +8,19 @@ from sqlalchemy import pool
 from alembic import context
 
 from sqlalchemy.ext.declarative import declarative_base
+from dotenv import load_dotenv
 
 Base = declarative_base()
+load_dotenv()
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+DB = os.environ.get('POSTGRES_DB')
+DB_USERNAME = os.environ.get('POSTGRES_USER')
+DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 config = context.config
-config.set_main_option('sqlalchemy.url', 'postgresql://postgres:mypassword)@postgres_container:5432/calculations')
+config.set_main_option('sqlalchemy.url',
+                       f'postgresql://{DB_USERNAME}:{DB_PASSWORD}@postgres_container:5432/{DB}')
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

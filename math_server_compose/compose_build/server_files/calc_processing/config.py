@@ -1,7 +1,13 @@
+import os
+
 from operator import *
 from math import *
 
 from pydantic import BaseSettings
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 class ConnectionSettings(BaseSettings):
@@ -11,13 +17,16 @@ class ConnectionSettings(BaseSettings):
 
 
 class DatabaseSettings(BaseSettings):
+    DB = os.environ.get('POSTGRES_DB')
+    DB_USERNAME = os.environ.get('POSTGRES_USER')
+    DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
     DATABASE = {
         'drivername': 'postgresql',
         'host': 'postgres_container',
         'port': '5432',
-        'username': 'postgres',
-        'password': 'mypassword)',
-        'database': 'calculations'
+        'username': DB_USERNAME,
+        'password': DB_PASSWORD,
+        'database': DB
     }
 
 

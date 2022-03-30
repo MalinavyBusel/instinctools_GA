@@ -5,10 +5,7 @@ services:
     container_name: postgres_container
     image: postgres:14.2
     restart: always
-    environment:
-      POSTGRES_DB: calculations
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mypassword)
+    env_file: compose_build/server_files/calc_processing/.env
     command: postgres -c listen_addresses="*"
     ports:
       - 5433:5432
