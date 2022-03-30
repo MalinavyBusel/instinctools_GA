@@ -1,0 +1,12 @@
+FROM python:3
+
+ADD alembic.ini /test_dir
+ADD alembic /test_dir
+ADD requirements/requirements_alembic.txt /test_dir
+ADD server_files/tests/test_migrations.py /test_dir
+
+RUN pip install -r /test_dir/requirements_alembic.txt
+
+WORKDIR /test_dir
+
+CMD ["pytest"]

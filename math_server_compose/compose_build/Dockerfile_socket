@@ -1,0 +1,10 @@
+FROM python:3
+
+ADD server_files/__init__.py /socket
+ADD server_files/server.py /socket
+ADD server_files/calc_processing /socket
+ADD requirements/requirements_socket.txt /socket
+
+RUN pip install -r /socket/requirements_socket.txt
+
+CMD ["python", "./socket/server.py"]
