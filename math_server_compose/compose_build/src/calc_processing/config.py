@@ -9,7 +9,7 @@ from decouple import config
 
 class ConnectionSettings(BaseSettings):
     HOST = '0.0.0.0'
-    FLASK_PORT = '5000'
+    HTTP_PORT = '5000'
     SOCKET_PORT = '65432'
 
 

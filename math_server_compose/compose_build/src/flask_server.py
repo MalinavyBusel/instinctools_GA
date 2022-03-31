@@ -69,4 +69,4 @@ def calculator():
 if __name__ == "__main__":
     session = connect_to_db()
     app.run(host=settings.HOST,
-            port=settings.FLASK_PORT)
+            port=settings.HTTP_PORT)
