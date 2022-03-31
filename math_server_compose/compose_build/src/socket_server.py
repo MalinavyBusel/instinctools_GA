@@ -5,7 +5,7 @@ from calc_processing.calculations import calculate
 from calc_processing.db_methods import connect_to_db, add_data
 
 HOST = settings.HOST
-PORT = int(settings.S_PORT)
+PORT = int(settings.SOCKET_PORT)
 
 session = connect_to_db()
 

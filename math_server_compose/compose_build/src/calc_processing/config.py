@@ -9,8 +9,8 @@ from decouple import config
 
 class ConnectionSettings(BaseSettings):
     HOST = '0.0.0.0'
-    F_PORT = '5000'
-    S_PORT = '65432'
+    FLASK_PORT = '5000'
+    SOCKET_PORT = '65432'
 
 
 class DatabaseSettings(BaseSettings):

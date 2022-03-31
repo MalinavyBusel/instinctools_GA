@@ -5,7 +5,7 @@ services:
     container_name: postgres_container
     image: postgres:14.2
     restart: always
-    env_file: compose_build/server_files/calc_processing/.env
+    env_file: compose_build/src/calc_processing/.env
     command: postgres -c listen_addresses="*"
     ports:
       - 5433:5432
@@ -16,7 +16,7 @@ services:
     container_name: making_migrations
     build:
       context: ./compose_build
-      dockerfile: Dockerfile_alembic
+      target: alembic
     depends_on:
       - db
     networks:
@@ -26,7 +26,7 @@ services:
     container_name: unit_tests
     build:
       context: ./compose_build
-      dockerfile: Dockerfile_unittests
+      target: units
     depends_on:
       - migrations
     networks:
@@ -36,7 +36,7 @@ services:
     container_name: flask_server
     build:
       context: ./compose_build
-      dockerfile: Dockerfile_flask
+      target: flask
     ports:
       - 5000:5000
     depends_on:
@@ -48,7 +48,7 @@ services:
     container_name: socket_server
     build:
       context: ./compose_build
-      dockerfile: Dockerfile_socket
+      target: socket
     ports:
       - 65432:65432
     depends_on:
@@ -60,7 +60,7 @@ services:
     container_name: integration_tests
     build:
       context: ./compose_build
-      dockerfile: Dockerfile_integr_tests
+      target: integration
     depends_on:
       - flask
       - socket
