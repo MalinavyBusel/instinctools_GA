@@ -1,21 +1,21 @@
+import os
 import json
 
 from flask import Flask
-from flask import request
+from flask import request, render_template
 from collections import deque
 
-from calculations import calculate, opers
-from db_methods import connect_to_db, add_data, get_data
+from calc_processing.config import settings
+from calc_processing.calculations import calculate, opers
+from calc_processing.db_methods import connect_to_db, add_data, get_data
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 history = deque(maxlen=5)
 
 
 @app.route("/", methods=['GET', 'POST'])
 def start():
-    return '''<a href="calculator">Calculator</a>
-<a href="operations">Operations</a>
-<a href="full_hist">Full_History</a>'''
+    return render_template('base.html')
 
 
 @app.route("/operations")
@@ -26,15 +26,7 @@ def operations():
 @app.route("/full_hist", methods=['GET', 'POST'])
 def full_hist():
 
-    form = '''
-               <form method="POST">
-                   <div><label>Operator: <input type="text" name="oper"></label></div>
-                   <div><label>Limit: <input type="text" name="limit"></label></div>
-                   <div><label>Offset: <input type="text" name="offset"></label></div>
-                   <input type="submit" value="Find">
-               </form>
-               <a href="operations">Operations</a>
-               <a href="calculator">Calculator</a>'''
+    form = render_template('history.html')
 
     if request.method == 'POST':
         oper = request.form.get('oper')
@@ -55,14 +47,6 @@ def full_hist():
 
 @app.route('/calculator', methods=['GET', 'POST'])
 def calculator():
-    form = '''
-           <form method="POST">
-               <div><label>Expression: <input type="text" name="expr"></label></div>
-               <input type="submit" value="Solve">
-           </form>
-           <a href="operations">Operations</a>
-           <a href="full_hist">Full_History</a>'''
-
     # handle the POST request
     if request.method == 'POST':
         expr = request.form.get('expr')
@@ -73,14 +57,16 @@ def calculator():
         history.appendleft(oper_to_hist)
 
         recent = '  <<>>  '.join(list(history))
-        return f'''<h1>The result is: {res}. {err}</h1>\n 
-{form}
-<h4>History:{recent}<h4>'''
+        return render_template('calculator_post.html',
+                                recent=recent,
+                                res=res,
+                                err=err)
 
     # otherwise handle the GET request
-    return form
+    return render_template('calculator_get.html')
 
 
 if __name__ == "__main__":
     session = connect_to_db()
-    app.run()
+    app.run(host=settings.HOST,
+            port=settings.HTTP_PORT)

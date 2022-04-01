@@ -1,0 +1,73 @@
+version: "3.9"
+services:
+
+  db:
+    container_name: postgres_container
+    image: postgres:14.2
+    restart: always
+    env_file: compose_build/src/calc_processing/.env
+    command: postgres -c listen_addresses="*"
+    ports:
+      - 5433:5432
+    networks:
+      - postgres
+
+  migrations:
+    container_name: making_migrations
+    build:
+      context: ./compose_build
+      target: alembic
+    depends_on:
+      - db
+    networks:
+      - postgres
+
+  unit:
+    container_name: unit_tests
+    build:
+      context: ./compose_build
+      target: units
+    depends_on:
+      - migrations
+    networks:
+      - postgres
+
+  flask:
+    container_name: flask_server
+    build:
+      context: ./compose_build
+      target: flask
+    ports:
+      - 5000:5000
+    depends_on:
+      - unit
+    networks:
+      - postgres
+
+  socket:
+    container_name: socket_server
+    build:
+      context: ./compose_build
+      target: socket
+    ports:
+      - 65432:65432
+    depends_on:
+      - unit
+    networks:
+      - postgres
+
+  integration:
+    container_name: integration_tests
+    build:
+      context: ./compose_build
+      target: integration
+    depends_on:
+      - flask
+      - socket
+    networks:
+      - postgres
+
+
+networks:
+  postgres:
+    driver: bridge

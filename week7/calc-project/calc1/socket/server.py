@@ -1,7 +1,7 @@
 import socket
 import os
 
-from calculations import calculate
+from calc_processing.calculations import calculate
 from dotenv import load_dotenv
 
 
@@ -9,7 +9,6 @@ load_dotenv()
 host, port = os.environ.get('HOST_AND_PORT').split(':')
 HOST = str(host)
 PORT = int(port)
-
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

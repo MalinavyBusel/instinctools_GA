@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: calc
+Version: 0.1
+Summary: A module for processing simple calculations.
+Home-page: https://github.com/MalinavyBusel
+Author: Egor Bagatyrevich
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+
+An http server that process the calculations
+

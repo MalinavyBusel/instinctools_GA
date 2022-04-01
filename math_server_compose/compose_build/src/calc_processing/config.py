@@ -1,17 +1,29 @@
+import os
+
 from operator import *
 from math import *
 
 from pydantic import BaseSettings
+from decouple import config
+
+
+class ConnectionSettings(BaseSettings):
+    HOST = '0.0.0.0'
+    HTTP_PORT = '5000'
+    SOCKET_PORT = '65432'
 
 
 class DatabaseSettings(BaseSettings):
+    DB = config('POSTGRES_DB', cast=str)
+    DB_USERNAME = config('POSTGRES_USER', cast=str)
+    DB_PASSWORD = config('POSTGRES_PASSWORD', cast=str)
     DATABASE = {
         'drivername': 'postgresql',
-        'host': 'localhost',
+        'host': 'postgres_container',
         'port': '5432',
-        'username': 'postgres',
-        'password': '0987612345357e',
-        'database': 'calculations'
+        'username': DB_USERNAME,
+        'password': DB_PASSWORD,
+        'database': DB
     }
 
 
@@ -25,7 +37,7 @@ class CalcSettings(BaseSettings):
                  "atan2": atan2, "ldexp": ldexp}
 
 
-class Settings(DatabaseSettings, CalcSettings):
+class Settings(DatabaseSettings, CalcSettings, ConnectionSettings):
     pass
 
 

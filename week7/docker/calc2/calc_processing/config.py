@@ -5,12 +5,14 @@ from pydantic import BaseSettings
 
 
 class DatabaseSettings(BaseSettings):
+    HOST = '0.0.0.0'
+    PORT = '5000'
     DATABASE = {
         'drivername': 'postgresql',
-        'host': 'localhost',
+        'host': 'host.docker.internal',
         'port': '5432',
         'username': 'postgres',
-        'password': '0987612345357e',
+        'password': 'mypassword)',
         'database': 'calculations'
     }
 
