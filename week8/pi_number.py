@@ -3,7 +3,7 @@ import multiprocessing as mp
 from random import random
 
 
-def count_pi(shared_val, total):
+def count_pi(shared_val: mp.Value, total: int):
     in_circle = 0
     for i in range(total):
         pair = (random(), random())
@@ -12,9 +12,11 @@ def count_pi(shared_val, total):
             in_circle += 1
     with shared_val.get_lock():
         shared_val.value += in_circle
+    return None
 
 
 def get_pi(total=20000):
+    # if needed, Value here can be replaced with Queue
     in_circle_total = mp.Value('i', 0)
     processes = []
     cores = mp.cpu_count()

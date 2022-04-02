@@ -22,6 +22,7 @@ def status_getter(url: str, res_dict: dict):
         value_str = 'invalid'
     with lock:
         res_dict[value_str].append(url)
+    return None
 
 
 class Http_status(threading.Thread):
@@ -34,6 +35,7 @@ class Http_status(threading.Thread):
 
     def run(self) -> None:
         self.target(self.url, self.res_dict)
+        return None
 
 
 def http_checker(urls: list) -> dict:
