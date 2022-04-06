@@ -9,35 +9,36 @@ from typing import Callable
 from requests.exceptions import ConnectionError
 
 
-### business logic
-def status_getter(url: str, res_dict: dict):
+# business logic
+executor = cf.ThreadPoolExecutor()
+
+
+def status_getter(url: str):
     try:
         res = requests.head(url).status_code
         if res == 405:
             res = requests.get(url).status_code
         if res != 200:
-            value_str = 'invalid'
+            value = False
         else:
-            value_str = 'positive_res'
+            value = True
     except ConnectionError:
-        value_str = 'invalid'
-    with lock:
-        res_dict[value_str].append(url)
-    return None
+        value = False
+    return (value, url)
 
 
 def http_checker(urls: list) -> dict:
-    executor = cf.ThreadPoolExecutor()
-    futures = []
     health_dict = {'positive_res': [], 'invalid': []}
-    for url in urls:
-        futures.append(executor.submit(status_getter, url, health_dict))
-    done, not_done = cf.wait(futures, return_when=cf.ALL_COMPLETED)
-    executor.shutdown()
+    futures = executor.map(status_getter, urls)
+    for result in futures:
+        if result[0]:
+            health_dict['positive_res'].append(result[1])
+        else:
+            health_dict['invalid'].append(result[1])
     return health_dict
 
 
-### HTTP logic
+# HTTP logic
 app = Flask(__name__)
 
 

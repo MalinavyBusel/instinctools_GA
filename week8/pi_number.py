@@ -1,33 +1,33 @@
 import multiprocessing as mp
+import concurrent.futures as cf
 
 from random import random
 
 
-def count_pi(shared_val: mp.Value, total: int):
+def count_pi(total: int):
     in_circle = 0
     for i in range(total):
         pair = (random(), random())
         squared_sum = pair[0]**2 + pair[1]**2
         if squared_sum < 1:
             in_circle += 1
-    with shared_val.get_lock():
-        shared_val.value += in_circle
-    return None
+    return in_circle
 
 
 def get_pi(total=20000):
-    # if needed, Value here can be replaced with Queue
-    in_circle_total = mp.Value('i', 0)
-    processes = []
+    in_circle_total = 0
     cores = mp.cpu_count()
     one_process_range = int(total/cores)
-    for proc in range(cores):
-        p = mp.Process(target=count_pi, args=(in_circle_total, one_process_range))
-        processes.append(p)
-        p.start()
-    for p in processes:
-        p.join()
-    return in_circle_total.value/total*4
+
+    executor = cf.ProcessPoolExecutor()
+
+    shared_val_list = [in_circle_total for i in range(cores)]
+    one_proc_range_list = [one_process_range for i in range(cores)]
+    futures = executor.map(count_pi, shared_val_list, one_proc_range_list)
+
+    for result in futures:
+        in_circle_total += result
+    return in_circle_total/total*4
 
 
 if __name__ == '__main__':
