@@ -1,5 +1,6 @@
 import requests
 import threading
+import concurrent.futures as cf
 import json
 
 from flask import Flask
@@ -25,29 +26,15 @@ def status_getter(url: str, res_dict: dict):
     return None
 
 
-class Http_status(threading.Thread):
-    def __init__(self, target: Callable, url: str, res_dict: dict):
-        threading.Thread.__init__(self)
-        self.daemon=False
-        self.target = target
-        self.url = url
-        self.res_dict = res_dict
-
-    def run(self) -> None:
-        self.target(self.url, self.res_dict)
-        return None
-
-
 def http_checker(urls: list) -> dict:
-    threads = []
-    health_list = {'positive_res': [], 'invalid': []}
+    executor = cf.ThreadPoolExecutor()
+    futures = []
+    health_dict = {'positive_res': [], 'invalid': []}
     for url in urls:
-        t = Http_status(status_getter, url, health_list)
-        t.start()
-        threads.append(t)
-    for thread in threads:
-        thread.join()
-    return health_list
+        futures.append(executor.submit(status_getter, url, health_dict))
+    done, not_done = cf.wait(futures, return_when=cf.ALL_COMPLETED)
+    executor.shutdown()
+    return health_dict
 
 
 ### HTTP logic
