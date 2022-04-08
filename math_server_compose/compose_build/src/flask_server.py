@@ -6,7 +6,7 @@ from flask import request, render_template
 from collections import deque
 
 from calc_processing.config import settings
-from calc_processing.calculations import calculate, opers
+from calc_processing.calculations import calculate_with_process_pool_exec, opers
 from calc_processing.db_methods import connect_to_db, add_data, get_data
 
 app = Flask(__name__, template_folder="templates")
@@ -50,7 +50,7 @@ def calculator():
     # handle the POST request
     if request.method == 'POST':
         expr = request.form.get('expr')
-        res, err = calculate(expr).split(':::')
+        res, err = calculate_with_process_pool_exec(expr).split(':::')
         add_data(session, expr, float(res))
 
         oper_to_hist = expr + ' == ' + res
