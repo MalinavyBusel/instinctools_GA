@@ -53,11 +53,10 @@ def calculate_2(expression: str):
 def calculate_with_process_pool_exec(expression: str, socket_conn):
     # The initializing of executor is moved out of function to line 11
     pool_process = executor.submit(calculate_2, expression)
-    pool_process.conn = socket_conn
     pool_process.add_done_callback(socket_callback)
     return pool_process.result()
 
 
 def socket_callback(future: cf.Future):
-    future.conn.sendall(future.result().encode(encoding='utf-8'))
+    socket_conn.sendall(future.result().encode(encoding='utf-8'))
     return None
