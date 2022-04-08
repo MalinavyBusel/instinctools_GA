@@ -1,7 +1,3 @@
-FROM python:3 as base_test
-
-ADD requirements/requirements.dev.txt /req
-
 FROM python:3 as http
 
 ADD requirements/requirements.prod.txt /req
@@ -11,7 +7,7 @@ RUN pip install -r /req/requirements.prod.txt
 
 WORKDIR /http
 
-CMD [ "gunicorn", "-w", "5", "--bind", "0.0.0.0:5001", "http_server:app"]
+CMD [ "gunicorn", "-w", "5", "--bind", "0.0.0.0:5000", "http_server:app"]
 
 FROM python:3 as units
 
@@ -32,11 +28,10 @@ CMD ["pytest"]
 
 FROM python:3 as integration
 
-ADD tests/test_flask.py /testing
-ADD tests/test_socket.py /testing
-ADD requirements/requirements.dev.txt /testing
+ADD requirements/requirements.dev.txt /req
+ADD tests/test_http.py /testing
 
-RUN pip install -r /testing/requirements.dev.txt
+RUN pip install -r /req/requirements.dev.txt
 RUN pip install requests
 
 WORKDIR /testing
