@@ -6,13 +6,13 @@ from pymongo.errors import ConnectionFailure
 from configuration.config import settings
 
 
-mongodb_client = pymongo.MongoClient(settings.DB_URI)
-mongodb = mongodb_client[settings.DB_NAME][settings.DB_TABLE]
-
-
 def test_connection_failing():
     with pytest.raises(ConnectionFailure):
         mongodb_client = pymongo.MongoClient('wrong_url')
+
+
+mongodb_client = pymongo.MongoClient(settings.DB_URI)
+mongodb = mongodb_client[settings.DB_NAME][settings.DB_TABLE]
 
 
 def test_db_adding(mongodb_=mongodb):
