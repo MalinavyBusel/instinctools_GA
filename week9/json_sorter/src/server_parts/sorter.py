@@ -26,8 +26,16 @@ def time_measurer(func: Callable, sequence: list):
     return result
 
 
-def pool_sorter(selected_sort: str, sequence: list):
+def pool_sorter(selected_sort: str, sequence: list, hashed: str, mongodb: "Colletion"):
     sorting_function = sorting_funcs[selected_sort]
     sorting_process = sorting_pool.submit(time_measurer, sorting_function, sequence)
+
+    def insert_data():
+        db_data = dict()
+        db_data['hashed_sequence'] = hashed
+        db_data['sorted_sequence'] = sorting_process.result()['sorted_sequence']
+        mongodb.insert_one{db_data}
+
+    sorting_process.add_done_callback(insert_data)
     return sorting_process.result()
 

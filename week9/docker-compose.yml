@@ -5,7 +5,7 @@ services:
     container_name: mongo
     image: mongo
     restart: always
-    env_file: json_sorter/src/server_parts/.env
+    env_file: compose.env
     command: mongod --auth
     networks:
       - mongodb
@@ -22,6 +22,7 @@ services:
 
   http:
     container_name: http
+    env_file: compose.env
     build:
       context: ./json_sorter
       target: http

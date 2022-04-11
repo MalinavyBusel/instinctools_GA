@@ -13,14 +13,14 @@ sorted_3 = [-345, -23.56, 0, 7.1, 8, 10, 12.84, 19.001, 74, 893, 5823]
 
 def test_1():
     assert insertion_sort(unsorted_1) == merge_sort(unsorted_1) \
-           == quick_sort(unsorted_1) == shaking_sort(unsorted_1)
+           == quick_sort(unsorted_1) == shaking_sort(unsorted_1) == sorted_1
 
 
 def test_2():
     assert insertion_sort(unsorted_2) == merge_sort(unsorted_2) \
-           == quick_sort(unsorted_2) == shaking_sort(unsorted_2)
+           == quick_sort(unsorted_2) == shaking_sort(unsorted_2) == sorted_2
 
 
 def test_3():
     assert insertion_sort(unsorted_3) == merge_sort(unsorted_3) \
-           == quick_sort(unsorted_3) == shaking_sort(unsorted_3)
+           == quick_sort(unsorted_3) == shaking_sort(unsorted_3) == sorted_3

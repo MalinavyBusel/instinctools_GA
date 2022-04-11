@@ -4,10 +4,11 @@ from decouple import config
 
 user = config('MONGO_INITDB_ROOT_USERNAME', cast=str)
 password = config('MONGO_INITDB_ROOT_PASSWORD', cast=str)
+db = config('DATABASE', cast=str)
 
 
 class Config(BaseSettings):
-    DB_URI = f'mongodb://{user}:{password}@mongo:27017'
+    DB_URI = f'mongodb://{user}:{password}@{db}:27017'
     DB_NAME = config('MONGO_INITDB_DATABASE', cast=str)
     DB_TABLE = config('DATABASE_TABLE', cast=str)
     HTTP_HOST = config('HTTP_HOST', cast=str)
