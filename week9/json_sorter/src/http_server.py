@@ -24,14 +24,13 @@ def main_post():
     sorting_result = mongodb.find_one({'hashed_sequence': hashed_sequence})
     if not sorting_result:
         sorting_result = pool_sorter(sorting_type, sequence)
-        sorting_result['hashed_sequence'] = hashed_sequence
-        sorting_result['sorting_type'] = sorting_type
-        mongodb.insert_one(sorting_result)
+        db_data = dict()
+        db_data['hashed_sequence'] = hashed_sequence
+        db_data['sorted_sequence'] = sorting_result['sorted_sequence']
+        mongodb.insert_one(db_data)
 
-    response_data = {'sorted_sequence': sorting_result['sorted_sequence'],
-                     'time_taken': sorting_result['time_taken']}
     response = app.response_class(
-        response=orjson.dumps(response_data),
+        response=orjson.dumps(sorting_result),
         status=200,
         mimetype='application/json'
     )
