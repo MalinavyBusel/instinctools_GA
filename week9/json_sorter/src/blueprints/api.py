@@ -20,12 +20,15 @@ def main_post():
     sorting_type = json_input.get('sorting_selected', 'shaking_sort')
     sequence = json_input['sequence']
 
-    hashed_sequence = hex(fnv1a_64(orjson.dumps(sequence)))
-    sorting_result = mongodb.find_one({'hashed_sequence': hashed_sequence})
-    if not sorting_result:
-        sorting_result = pool_sorter(sorting_type, sequence,
-                                     hashed_sequence, mongodb)
-        # DB adding was moved to pool_sorter as a callback
+    if len(sequence) > 350:
+        hashed_sequence = hex(fnv1a_64(orjson.dumps(sequence)))
+        sorting_result = mongodb.find_one({'hashed_sequence': hashed_sequence})
+        if not sorting_result:
+            sorting_result = pool_sorter(sorting_type, sequence,
+                                         (hashed_sequence, mongodb))
+            # DB adding was moved to pool_sorter as a callback
+    else:
+        sorting_result = pool_sorter(sorting_type, sequence)
 
     response = app.response_class(
         response=orjson.dumps(sorting_result),
