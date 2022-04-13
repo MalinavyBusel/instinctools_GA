@@ -19,9 +19,9 @@ def choose_best_image(main_image: Image, images: list):
     return pics_diff[min(pics_diff.keys())]
 
 
-target = 'target_pic'
-images_path = 'i_path'
-images = ['1', '2', '3', '4', '5', '6']
+target = 'pic.jpg'
+images_path = 'sides'
+images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg']
 target_image = Image.open(target)
 
 imgwidth, imgheight = target_image.size
