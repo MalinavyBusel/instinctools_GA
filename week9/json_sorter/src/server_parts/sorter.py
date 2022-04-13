@@ -32,10 +32,12 @@ def pool_sorter(selected_sort: str, sequence: list, write_to_db: tuple=None):
 
     if write_to_db:
         def insert_data():
+            hashed = write_to_db[0]
+            database = write_to_db[1]
             db_data = dict()
-            db_data['hashed_sequence'] = write_to_db[0]
+            db_data['hashed_sequence'] = hashed
             db_data['sorted_sequence'] = sorting_process.result()['sorted_sequence']
-            write_to_db[1].insert_one{db_data}
+            database.insert_one{db_data}
         sorting_process.add_done_callback(insert_data)
 
     return sorting_process.result()

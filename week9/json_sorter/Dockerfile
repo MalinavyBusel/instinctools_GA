@@ -7,7 +7,8 @@ RUN pip install -r /http/requirements.prod.txt
 
 WORKDIR /http
 
-CMD [ "gunicorn", "${WORKERS}", "${THREADS}", "--bind", "${GUNICORN_HOST_AND_PORT}", "http_server:app"]
+CMD [ "gunicorn", "--workers=${WORKERS}", "--threads=${THREADS}",
+      "--bind", "${GUNICORN_HOST_AND_PORT}", "http_server:app"]
 
 FROM python:3 as units
 
