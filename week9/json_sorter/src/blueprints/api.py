@@ -5,7 +5,8 @@ from flask import Flask, request, Blueprint
 from fnvhash import fnv1a_64
 
 from server_parts.sorter import pool_sorter
-from server_parts.config import settings, InputData, OutputData
+from server_parts.config import settings
+from server_parts.data_models import InputData, OutputData
 
 
 mongodb_client = pymongo.MongoClient(settings.DB_URI)

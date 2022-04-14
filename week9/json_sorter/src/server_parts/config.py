@@ -1,23 +1,12 @@
 import datetime
 
-from pydantic import BaseSettings, BaseModel, Field
-from typing import Optional
+from pydantic import BaseSettings
 from decouple import config
 
 
 user = config('MONGO_INITDB_ROOT_USERNAME', cast=str)
 password = config('MONGO_INITDB_ROOT_PASSWORD', cast=str)
 db = config('DATABASE', cast=str)
-
-
-class InputData(BaseModel):
-    sequence: list[int]
-    sorting_selected: Optional[str] = Field(default='shaking_sort')
-
-
-class OutputData(BaseModel):
-    sorted_sequence: list[int]
-    time_taken: Optional[datetime.time]
 
 
 class Config(BaseSettings):
