@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    env_file: compose.env
+    command: mongod --auth
+    networks:
+      - mongodb
+
+  unit:
+    container_name: unit
+    build:
+      context: ./json_sorter
+      target: units
+    depends_on:
+      - mongo
+    networks:
+      - mongodb
+
+  http:
+    container_name: http
+    env_file: compose.env
+    build:
+      context: ./json_sorter
+      target: http
+    ports:
+      - 5000:5000
+    depends_on:
+      - unit
+    networks:
+      - mongodb
+
+  integration:
+    container_name: integration
+    build:
+      context: ./json_sorter
+      target: integration
+    depends_on:
+      - http
+    networks:
+      - mongodb
+
+
+networks:
+  mongodb:
+    driver: bridge
